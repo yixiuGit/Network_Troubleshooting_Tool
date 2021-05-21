@@ -1,0 +1,116 @@
+testbed:
+  name: first test
+  credentials:
+    default:
+      username: 'cisco'
+      password: 'cisco'
+devices:
+  # dist-rtr01:
+  #   alias: dist-rtr01
+  #   type: router
+  #   os: iosxe
+  #   connections:
+  #     a: 
+  #       protocol: ssh
+  #       ip : 10.10.20.175
+  dist-rtr02:
+    # alias: uut
+    os: iosxe
+    type: router
+    series: csr1000v
+    connections:
+      defaults:
+        class: unicon.Unicon
+      a:
+        protocol: ssh
+        ip: 10.10.20.176
+  dist-sw01:
+    alias: uut
+    os: nxos
+    type: switch
+    series: n9k
+    connections:
+      defaults:
+        class: unicon.Unicon
+      a:
+        protocol: ssh
+        ip: 10.10.20.177
+# topology:
+#   dist-rtr01:
+#     interfaces:
+#       Loopback0:
+#         type: loopback
+#       GigabitEthernet1:
+#         link: l4
+#         type: ethernet
+#       GigabitEthernet2:
+#         link: l9
+#         type: ethernet
+#       GigabitEthernet3:
+#         link: l11
+#         type: ethernet
+#       GigabitEthernet4:
+#         link: l13
+#         type: ethernet
+#       GigabitEthernet5:
+#         link: l14
+#         type: ethernet
+#       GigabitEthernet6:
+#         link: l26
+#         type: ethernet
+#   dist-rtr02:
+#     interfaces:
+#       Loopback0:
+#         type: loopback
+#       GigabitEthernet1:
+#         link: l25
+#         type: ethernet
+#       GigabitEthernet2:
+#         link: l10
+#         type: ethernet
+#       GigabitEthernet3:
+#         link: l12
+#         type: ethernet
+#       GigabitEthernet4:
+#         link: l15
+#         type: ethernet
+#       GigabitEthernet5:
+#         link: l16
+#         type: ethernet
+#       GigabitEthernet6:
+#         link: l26
+#         type: ethernet
+#   dist-sw01:
+#     interfaces:
+#       Loopback0:
+#         type: loopback
+#       mgmt0:
+#         link: l27
+#         type: ethernet
+#       Ethernet1/1:
+#         link: l5
+#         type: ethernet
+#       Ethernet1/2:
+#         link: l6
+#         type: ethernet
+#       Ethernet1/3:
+#         link: l13
+#         type: ethernet
+#       Ethernet1/4:
+#         link: l15
+#         type: ethernet
+#       Ethernet1/5:
+#         type: ethernet
+#       Ethernet1/6:
+#         type: ethernet
+#       Ethernet1/7:
+#         type: ethernet
+#       Ethernet1/8:
+#         type: ethernet
+#       Ethernet1/9:
+#         type: ethernet
+#       Ethernet1/10:
+#         type: ethernet
+#       Ethernet1/11:
+#         link: l17
+#         type: ethernet

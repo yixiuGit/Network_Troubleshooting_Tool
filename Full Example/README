@@ -1,0 +1,27 @@
+# How to use this tool
+#### File structure
+- All the files and folders will be saved under home folder.
+- site1, site2, site3 represent different sites. 
+- testbed.yaml file contains device information for each site(such as login credential, ip, connection methods)
+- file1.txt contains device hostnames for each site, they are exact the same as in the testbed.yaml
+- golden.robot is for collecting golden image for each site
+- compare.robot is for collecting current image, comparing with golden image and showing difference
+
+#### Get Golden Image
+Run below command within the console
+- robot --outputdir run golden.robot
+It will create a new folder called "good" in each site folder and save the golden image there.
+The report will be saved in the newly created folder "run".
+
+#### Check whole site
+Run below command within the console to get difference for the whole site
+- robot --outputdir comp -v sitename:site1 compare.robot
+It will create a new folder called "current" in site1 folder and save the current image there.
+The report will be saved in the newly created folder "comp"
+
+#### Check for particular device
+Run below command within the console to get difference for particular device(s)
+- robot --outputdir comp -v sitename:site1 -v device1:dist-rtr01 compare.robot
+This will create a new folder called "current" in site1 folder and save the current image of device dist-rtr01.
+The report will be saved in the newly created folder "comp"
+You can check up to 5 devices in the same site, device variable will be device2, device3, device4 and device5.

@@ -1,0 +1,3274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.6.8 on linux)" generated="20201110 18:47:18.640" rpa="false">
+<suite id="s1" name="Compare" source="/home/developer/compare.robot">
+<test id="s1-t1" name="Connect">
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>/home/developer/file1.txt</arg>
+</arguments>
+<assign>
+<var>${File}</var>
+</assign>
+<msg timestamp="20201110 18:47:19.912" level="INFO" html="yes">Getting file '&lt;a href="file:///home/developer/file1.txt"&gt;/home/developer/file1.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20201110 18:47:19.912" level="INFO">${File} = dist-rtr01
+dist-rtr02
+</msg>
+<status status="PASS" starttime="20201110 18:47:19.912" endtime="20201110 18:47:19.913"></status>
+</kw>
+<kw name="Split To Lines" library="String">
+<doc>Splits the given string to lines.</doc>
+<arguments>
+<arg>${File}</arg>
+</arguments>
+<assign>
+<var>@{lines}</var>
+</assign>
+<msg timestamp="20201110 18:47:19.914" level="INFO">2 lines returned</msg>
+<msg timestamp="20201110 18:47:19.914" level="INFO">@{lines} = [ dist-rtr01 | dist-rtr02 ]</msg>
+<status status="PASS" starttime="20201110 18:47:19.914" endtime="20201110 18:47:19.914"></status>
+</kw>
+<kw name="use genie testbed &quot;${testbed}&quot;" library="genie.libs.robot.GenieRobot">
+<doc>Create the genie testbed</doc>
+<msg timestamp="20201110 18:47:19.956" level="INFO">+------------------------------------------------------------------------------+
+|                            Genie datafiles used:                             |
++------------------------------------------------------------------------------+</msg>
+<msg timestamp="20201110 18:47:19.956" level="INFO">Trigger datafile          | </msg>
+<msg timestamp="20201110 18:47:19.956" level="INFO">Verification  datafile    | </msg>
+<msg timestamp="20201110 18:47:19.956" level="INFO">Pts datafile              | /home/developer/py3venv/lib/python3.6/site-packages/genie/libs/sdk/genie_yamls/pts_datafile.yaml</msg>
+<msg timestamp="20201110 18:47:19.956" level="INFO">Subsection datafile       | /home/developer/py3venv/lib/python3.6/site-packages/genie/libs/sdk/genie_yamls/subsection_datafile.yaml</msg>
+<msg timestamp="20201110 18:47:19.956" level="INFO">Config datafile           | None</msg>
+<msg timestamp="20201110 18:47:19.983" level="WARN">Could not load the Datafile correctly</msg>
+<status status="PASS" starttime="20201110 18:47:19.915" endtime="20201110 18:47:19.983"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${File}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:19.984" level="INFO">${File} = dist-rtr01
+dist-rtr02
+</msg>
+<status status="PASS" starttime="20201110 18:47:19.983" endtime="20201110 18:47:19.984"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>@{lines}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:19.985" level="INFO">@{lines} = [ dist-rtr01 | dist-rtr02 ]</msg>
+<status status="PASS" starttime="20201110 18:47:19.984" endtime="20201110 18:47:19.985"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${lines}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:19.985" level="INFO">['dist-rtr01', 'dist-rtr02']</msg>
+<status status="PASS" starttime="20201110 18:47:19.985" endtime="20201110 18:47:19.986"></status>
+</kw>
+<kw name="${line} IN [ @{lines} ]" type="for">
+<kw name="${line} = dist-rtr01" type="foritem">
+<kw name="connect to device &quot;${line}&quot;" library="ats.robot.pyATSRobot">
+<doc>Connect to device connection as defined in testbed.yaml</doc>
+<msg timestamp="20201110 18:47:19.987" level="INFO">Connecting to device 'Device dist-rtr01, type router'</msg>
+<msg timestamp="20201110 18:47:19.987" level="INFO">kwargs: {}</msg>
+<msg timestamp="20201110 18:47:21.481" level="INFO">2020-11-10 18:47:19,988: %UNICON-INFO: +++ dist-rtr01 logfile /tmp/dist-rtr01-cli-20201110T184719988.log +++
+
+2020-11-10 18:47:19,989: %UNICON-INFO: +++ Unicon plugin iosxe +++
+Warning: Permanently added '10.10.20.175' (RSA) to the list of known hosts.
+
+
+2020-11-10 18:47:20,504: %UNICON-INFO: +++ connection to spawn: ssh -l cisco 10.10.20.175, id: 140379814706536 +++
+
+2020-11-10 18:47:20,504: %UNICON-INFO: connection to dist-rtr01
+cisco@10.10.20.175's password: 
+
+
+
+dist-rtr01#
+
+2020-11-10 18:47:20,788: %UNICON-INFO: +++ initializing handle +++
+
+2020-11-10 18:47:20,789: %UNICON-INFO: +++ dist-rtr01: executing command 'term length 0' +++
+term length 0
+dist-rtr01#
+
+2020-11-10 18:47:20,956: %UNICON-INFO: +++ dist-rtr01: executing command 'term width 0' +++
+term width 0
+dist-rtr01#
+
+2020-11-10 18:47:21,107: %UNICON-INFO: +++ dist-rtr01: executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 16.11.01b
+Cisco IOS Software [Gibraltar], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.11.1b, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 28-May-19 12:45 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2019 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+dist-rtr01 uptime is 5 hours, 21 minutes
+Uptime for this control processor is 5 hours, 23 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: Unknown reason
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1201684K/3075K bytes of memory.
+Processor board ID 9H6EHHUH1NP
+6 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3018504K bytes of physical memory.
+16162815K bytes of virtual hard disk at bootflash:.
+0K bytes of WebUI ODM Files at webui:.
+
+Configuration register is 0x2102
+
+dist-rtr01#
+
+2020-11-10 18:47:21,271: %UNICON-INFO: +++ dist-rtr01: configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+dist-rtr01(config)#no logging console
+dist-rtr01(config)#line console 0
+dist-rtr01(config-line)#exec-timeout 0
+dist-rtr01(config-line)#end
+dist-rtr01#</msg>
+<status status="PASS" starttime="20201110 18:47:19.986" endtime="20201110 18:47:21.482"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:19.986" endtime="20201110 18:47:21.482"></status>
+</kw>
+<kw name="${line} = dist-rtr02" type="foritem">
+<kw name="connect to device &quot;${line}&quot;" library="ats.robot.pyATSRobot">
+<doc>Connect to device connection as defined in testbed.yaml</doc>
+<msg timestamp="20201110 18:47:21.483" level="INFO">Connecting to device 'Device dist-rtr02, type router'</msg>
+<msg timestamp="20201110 18:47:21.484" level="INFO">kwargs: {}</msg>
+<msg timestamp="20201110 18:47:22.778" level="INFO">2020-11-10 18:47:21,485: %UNICON-INFO: +++ dist-rtr02 logfile /tmp/dist-rtr02-cli-20201110T184721485.log +++
+
+2020-11-10 18:47:21,486: %UNICON-INFO: +++ Unicon plugin iosxe/csr1000v +++
+Warning: Permanently added '10.10.20.176' (RSA) to the list of known hosts.
+
+
+2020-11-10 18:47:21,786: %UNICON-INFO: +++ connection to spawn: ssh -l cisco 10.10.20.176, id: 140379809486552 +++
+
+2020-11-10 18:47:21,787: %UNICON-INFO: connection to dist-rtr02
+cisco@10.10.20.176's password: 
+
+
+
+dist-rtr02#
+
+2020-11-10 18:47:22,054: %UNICON-INFO: +++ initializing handle +++
+
+2020-11-10 18:47:22,055: %UNICON-INFO: +++ dist-rtr02: executing command 'term length 0' +++
+term length 0
+dist-rtr02#
+
+2020-11-10 18:47:22,219: %UNICON-INFO: +++ dist-rtr02: executing command 'term width 0' +++
+term width 0
+dist-rtr02#
+
+2020-11-10 18:47:22,371: %UNICON-INFO: +++ dist-rtr02: executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 16.11.01b
+Cisco IOS Software [Gibraltar], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.11.1b, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 28-May-19 12:45 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2019 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+dist-rtr02 uptime is 5 hours, 21 minutes
+Uptime for this control processor is 5 hours, 23 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: Unknown reason
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1201684K/3075K bytes of memory.
+Processor board ID 9ZOXBIEO4R9
+6 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3018504K bytes of physical memory.
+16162815K bytes of virtual hard disk at bootflash:.
+0K bytes of WebUI ODM Files at webui:.
+
+Configuration register is 0x2102
+
+dist-rtr02#
+
+2020-11-10 18:47:22,545: %UNICON-INFO: +++ dist-rtr02: configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+dist-rtr02(config)#no logging console
+dist-rtr02(config)#line console 0
+dist-rtr02(config-line)#exec-timeout 0
+dist-rtr02(config-line)#end
+dist-rtr02#</msg>
+<status status="PASS" starttime="20201110 18:47:21.483" endtime="20201110 18:47:22.778"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:21.482" endtime="20201110 18:47:22.779"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:19.986" endtime="20201110 18:47:22.779"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:19.911" endtime="20201110 18:47:22.779" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Profile the devices">
+<kw name="Create Directory" library="OperatingSystem">
+<doc>Creates the specified directory.</doc>
+<arguments>
+<arg>/home/developer/current</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.782" level="INFO" html="yes">Directory '&lt;a href="file:///home/developer/current"&gt;/home/developer/current&lt;/a&gt;' already exists.</msg>
+<status status="PASS" starttime="20201110 18:47:22.781" endtime="20201110 18:47:22.782"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<arguments>
+<arg>${device1}</arg>
+<arg>${device2}</arg>
+<arg>${device3}</arg>
+<arg>${device4}</arg>
+<arg>${device5}</arg>
+</arguments>
+<assign>
+<var>${device_list}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.783" level="INFO">${device_list} = ['', 'dist-rtr02', '', '', '']</msg>
+<status status="PASS" starttime="20201110 18:47:22.782" endtime="20201110 18:47:22.783"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<assign>
+<var>@{check_list}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.784" level="INFO">@{check_list} = [ ]</msg>
+<status status="PASS" starttime="20201110 18:47:22.783" endtime="20201110 18:47:22.784"></status>
+</kw>
+<kw name="${i} IN RANGE [ 0 | 5 ]" type="for">
+<kw name="${i} = 0" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${device_list}</arg>
+<arg>${i}</arg>
+</arguments>
+<assign>
+<var>${d}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.785" level="INFO">${d} = </msg>
+<status status="PASS" starttime="20201110 18:47:22.784" endtime="20201110 18:47:22.785"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${d}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.786" level="INFO"></msg>
+<status status="PASS" starttime="20201110 18:47:22.785" endtime="20201110 18:47:22.786"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${d}' != ''</arg>
+<arg>Append To List</arg>
+<arg>${check_list}</arg>
+<arg>${d}</arg>
+</arguments>
+<status status="PASS" starttime="20201110 18:47:22.786" endtime="20201110 18:47:22.786"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.784" endtime="20201110 18:47:22.786"></status>
+</kw>
+<kw name="${i} = 1" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${device_list}</arg>
+<arg>${i}</arg>
+</arguments>
+<assign>
+<var>${d}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.787" level="INFO">${d} = dist-rtr02</msg>
+<status status="PASS" starttime="20201110 18:47:22.787" endtime="20201110 18:47:22.787"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${d}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.788" level="INFO">dist-rtr02</msg>
+<status status="PASS" starttime="20201110 18:47:22.788" endtime="20201110 18:47:22.788"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${d}' != ''</arg>
+<arg>Append To List</arg>
+<arg>${check_list}</arg>
+<arg>${d}</arg>
+</arguments>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${check_list}</arg>
+<arg>${d}</arg>
+</arguments>
+<status status="PASS" starttime="20201110 18:47:22.789" endtime="20201110 18:47:22.789"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.788" endtime="20201110 18:47:22.789"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.787" endtime="20201110 18:47:22.789"></status>
+</kw>
+<kw name="${i} = 2" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${device_list}</arg>
+<arg>${i}</arg>
+</arguments>
+<assign>
+<var>${d}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.790" level="INFO">${d} = </msg>
+<status status="PASS" starttime="20201110 18:47:22.790" endtime="20201110 18:47:22.790"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${d}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.791" level="INFO"></msg>
+<status status="PASS" starttime="20201110 18:47:22.790" endtime="20201110 18:47:22.791"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${d}' != ''</arg>
+<arg>Append To List</arg>
+<arg>${check_list}</arg>
+<arg>${d}</arg>
+</arguments>
+<status status="PASS" starttime="20201110 18:47:22.791" endtime="20201110 18:47:22.791"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.789" endtime="20201110 18:47:22.791"></status>
+</kw>
+<kw name="${i} = 3" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${device_list}</arg>
+<arg>${i}</arg>
+</arguments>
+<assign>
+<var>${d}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.792" level="INFO">${d} = </msg>
+<status status="PASS" starttime="20201110 18:47:22.792" endtime="20201110 18:47:22.792"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${d}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.793" level="INFO"></msg>
+<status status="PASS" starttime="20201110 18:47:22.792" endtime="20201110 18:47:22.793"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${d}' != ''</arg>
+<arg>Append To List</arg>
+<arg>${check_list}</arg>
+<arg>${d}</arg>
+</arguments>
+<status status="PASS" starttime="20201110 18:47:22.793" endtime="20201110 18:47:22.793"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.792" endtime="20201110 18:47:22.794"></status>
+</kw>
+<kw name="${i} = 4" type="foritem">
+<kw name="Get From List" library="Collections">
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<arguments>
+<arg>${device_list}</arg>
+<arg>${i}</arg>
+</arguments>
+<assign>
+<var>${d}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.794" level="INFO">${d} = </msg>
+<status status="PASS" starttime="20201110 18:47:22.794" endtime="20201110 18:47:22.794"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${d}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.795" level="INFO"></msg>
+<status status="PASS" starttime="20201110 18:47:22.795" endtime="20201110 18:47:22.795"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${d}' != ''</arg>
+<arg>Append To List</arg>
+<arg>${check_list}</arg>
+<arg>${d}</arg>
+</arguments>
+<status status="PASS" starttime="20201110 18:47:22.795" endtime="20201110 18:47:22.796"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.794" endtime="20201110 18:47:22.796"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.784" endtime="20201110 18:47:22.796"></status>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${check_list}</arg>
+</arguments>
+<assign>
+<var>${len}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.796" level="INFO">Length is 1</msg>
+<msg timestamp="20201110 18:47:22.797" level="INFO">${len} = 1</msg>
+<status status="PASS" starttime="20201110 18:47:22.796" endtime="20201110 18:47:22.797"></status>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=;</arg>
+<arg>@{lines}</arg>
+</arguments>
+<assign>
+<var>${defaultdevices}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.797" level="INFO">${defaultdevices} = dist-rtr01;dist-rtr02</msg>
+<status status="PASS" starttime="20201110 18:47:22.797" endtime="20201110 18:47:22.798"></status>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=;</arg>
+<arg>@{check_list}</arg>
+</arguments>
+<assign>
+<var>${inputdevices}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.798" level="INFO">${inputdevices} = dist-rtr02</msg>
+<status status="PASS" starttime="20201110 18:47:22.798" endtime="20201110 18:47:22.798"></status>
+</kw>
+<kw name="Set Variable If" library="BuiltIn">
+<doc>Sets variable based on the given condition.</doc>
+<arguments>
+<arg>${len} == 0</arg>
+<arg>${defaultdevices}</arg>
+<arg>${inputdevices}</arg>
+</arguments>
+<assign>
+<var>${alldevices}</var>
+</assign>
+<msg timestamp="20201110 18:47:22.799" level="INFO">${alldevices} = dist-rtr02</msg>
+<status status="PASS" starttime="20201110 18:47:22.799" endtime="20201110 18:47:22.799"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${alldevices}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.800" level="INFO">dist-rtr02</msg>
+<status status="PASS" starttime="20201110 18:47:22.800" endtime="20201110 18:47:22.800"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${alldevices}</arg>
+</arguments>
+<msg timestamp="20201110 18:47:22.801" level="INFO">${alldevices} = dist-rtr02</msg>
+<status status="PASS" starttime="20201110 18:47:22.800" endtime="20201110 18:47:22.801"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${len} == 0</arg>
+<arg>Profile the system for "config;interface;platform;ospf;arp;routing;vrf;vlan" on devices "${alldevices}" as "/current/new_snapshot"</arg>
+<arg>ELSE</arg>
+<arg>Profile the system for "config;interface;platform;ospf;arp;routing;vrf;vlan" on devices "${alldevices}" as "./current/new_snapshot"</arg>
+</arguments>
+<kw name="Profile the system for &quot;config;interface;platform;ospf;arp;routing;vrf;vlan&quot; on devices &quot;dist-rtr02&quot; as &quot;./current/new_snapshot&quot;" library="genie.libs.robot.GenieRobot">
+<doc>Profile system as per the provided features on the devices</doc>
+<msg timestamp="20201110 18:47:22.803" level="INFO">Start learning device configuration</msg>
+<msg timestamp="20201110 18:47:23.194" level="INFO">Start learning feature interface</msg>
+<msg timestamp="20201110 18:47:24.483" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_interface.ShowIpv6Interface'&gt;
+Parser Output is empty</msg>
+<msg timestamp="20201110 18:47:24.484" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:24.484" level="INFO">| Commands for learning feature 'Interface'                                                                                                          |</msg>
+<msg timestamp="20201110 18:47:24.484" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:24.484" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20201110 18:47:24.484" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:24.484" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_vrf.ShowVrf'&gt;, arguments: {'vrf':''}                                                                   |</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_interface.ShowInterfaces'&gt;, arguments: {'interface':''}                                                |</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_interface.ShowInterfacesAccounting'&gt;, arguments: {'interface':''}                                      |</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_interface.ShowIpInterface'&gt;, arguments: {'interface':''}                                               |</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">| - Commands with empty output                                                                                                                       |</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_interface.ShowIpv6Interface'&gt;, arguments: {'interface':''}                                             |</msg>
+<msg timestamp="20201110 18:47:24.485" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:24.546" level="INFO">Start learning feature platform</msg>
+<msg timestamp="20201110 18:47:37.423" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:37.423" level="INFO">| Commands for learning feature 'Platform'                                                                                                           |</msg>
+<msg timestamp="20201110 18:47:37.423" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:37.423" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20201110 18:47:37.423" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:37.424" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_platform.ShowVersion'&gt;                                                                                 |</msg>
+<msg timestamp="20201110 18:47:37.424" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_platform.Dir'&gt;                                                                                         |</msg>
+<msg timestamp="20201110 18:47:37.424" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_platform.ShowRedundancy'&gt;                                                                              |</msg>
+<msg timestamp="20201110 18:47:37.424" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_platform.ShowInventory'&gt;                                                                               |</msg>
+<msg timestamp="20201110 18:47:37.424" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_issu.ShowIssuRollbackTimer'&gt;                                                                           |</msg>
+<msg timestamp="20201110 18:47:37.424" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_platform.ShowPlatform'&gt;                                                                                |</msg>
+<msg timestamp="20201110 18:47:37.425" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_issu.ShowIssuStateDetail'&gt;                                                                             |</msg>
+<msg timestamp="20201110 18:47:37.425" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:37.434" level="INFO">Start learning feature ospf</msg>
+<msg timestamp="20201110 18:47:40.890" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfVirtualLinks'&gt;
+Show Command: show ip ospf virtual-links
+Parser Output is empty</msg>
+<msg timestamp="20201110 18:47:46.612" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfShamLinks'&gt;
+Show Command: show ip ospf sham-links
+Parser Output is empty</msg>
+<msg timestamp="20201110 18:47:46.613" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:46.613" level="INFO">| Commands for learning feature 'Ospf'                                                                                                               |</msg>
+<msg timestamp="20201110 18:47:46.613" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:46.613" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20201110 18:47:46.613" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspf'&gt;                                                                                      |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_protocols.ShowIpProtocols'&gt;, arguments: {'vrf':''}                                                     |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfMplsLdpInterface'&gt;, arguments: {'interface':''}                                         |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfMplsTrafficEngLink'&gt;                                                                    |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseRouter'&gt;                                                                        |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseNetwork'&gt;                                                                       |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseExternal'&gt;                                                                      |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseSummary'&gt;                                                                       |</msg>
+<msg timestamp="20201110 18:47:46.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseOpaqueArea'&gt;                                                                    |</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfInterface'&gt;, arguments: {'interface':''}                                                |</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfNeighborDetail'&gt;, arguments: {'neighbor':''}                                            |</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">| - Commands with empty output                                                                                                                       |</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfVirtualLinks'&gt;                                                                          |</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfShamLinks'&gt;                                                                             |</msg>
+<msg timestamp="20201110 18:47:46.615" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:47.162" level="INFO">Start learning feature arp</msg>
+<msg timestamp="20201110 18:47:48.179" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.180" level="INFO">| Commands for learning feature 'Arp'                                                                                                                |</msg>
+<msg timestamp="20201110 18:47:48.180" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.180" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20201110 18:47:48.180" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:48.180" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_arp.ShowIpArp'&gt;                                                                                        |</msg>
+<msg timestamp="20201110 18:47:48.180" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_vrf.ShowVrf'&gt;                                                                                          |</msg>
+<msg timestamp="20201110 18:47:48.180" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_arp.ShowIpArp'&gt;, arguments: {'vrf':'Mgmt-intf'}                                                        |</msg>
+<msg timestamp="20201110 18:47:48.181" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_interface.ShowIpInterface'&gt;                                                                            |</msg>
+<msg timestamp="20201110 18:47:48.181" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_arp.ShowIpArpSummary'&gt;                                                                                 |</msg>
+<msg timestamp="20201110 18:47:48.181" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_arp.ShowIpTraffic'&gt;                                                                                    |</msg>
+<msg timestamp="20201110 18:47:48.181" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:48.195" level="INFO">Start learning feature routing</msg>
+<msg timestamp="20201110 18:47:48.562" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.563" level="INFO">| Commands for learning feature 'Routing'                                                                                                            |</msg>
+<msg timestamp="20201110 18:47:48.563" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.563" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20201110 18:47:48.563" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:48.563" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_routing.ShowIpRouteDistributor'&gt;                                                                       |</msg>
+<msg timestamp="20201110 18:47:48.563" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_routing.ShowIpv6RouteDistributor'&gt;                                                                     |</msg>
+<msg timestamp="20201110 18:47:48.563" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:48.638" level="INFO">Start learning feature vrf</msg>
+<msg timestamp="20201110 18:47:48.834" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.834" level="INFO">| Commands for learning feature 'Vrf'                                                                                                                |</msg>
+<msg timestamp="20201110 18:47:48.834" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.834" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20201110 18:47:48.834" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:48.834" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_vrf.ShowVrfDetail'&gt;, arguments: {'vrf':''}                                                             |</msg>
+<msg timestamp="20201110 18:47:48.834" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:48.835" level="INFO">Start learning feature vlan</msg>
+<msg timestamp="20201110 18:47:48.976" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_vlan.ShowVlan'&gt;
+Invalid command has been executed</msg>
+<msg timestamp="20201110 18:47:48.976" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.977" level="INFO">| Commands for learning feature 'Vlan'                                                                                                               |</msg>
+<msg timestamp="20201110 18:47:48.977" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20201110 18:47:48.977" level="INFO">| - Commands not accepted on the device                                                                                                              |</msg>
+<msg timestamp="20201110 18:47:48.977" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20201110 18:47:48.977" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_vlan.ShowVlan'&gt;                                                                                        |</msg>
+<msg timestamp="20201110 18:47:48.977" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20201110 18:47:49.249" level="INFO">Saved system profile as file: /home/developer/./current/new_snapshot_dist-rtr02_vlan_pts.json</msg>
+<msg timestamp="20201110 18:47:49.251" level="INFO">2020-11-10 18:47:22,803: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config' +++
+show running-config
+Building configuration...
+
+Current configuration : 7135 bytes
+!
+! Last configuration change at 02:47:22 UTC Wed Nov 11 2020 by cisco
+!
+version 16.11
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname dist-rtr02
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+no logging console
+enable password cisco
+!
+no aaa new-model
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+  no destination transport-method email
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+crypto pki trustpoint TP-self-signed-3452037538
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3452037538
+ revocation-check none
+ rsakeypair TP-self-signed-3452037538
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030 
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363 
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934 
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305 
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720 
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030 
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D 
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520 
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE 
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC 
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188 
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7 
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191 
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44 
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201 
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85 
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500 
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905 
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B 
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8 
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C 
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B 
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678 
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB 
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0 
+  D697DF7F 28
+  	quit
+crypto pki certificate chain TP-self-signed-3452037538
+ certificate self-signed 01
+  30820330 30820218 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33343532 30333735 3338301E 170D3230 31313130 32313236 
+  30355A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 34353230 
+  33373533 38308201 22300D06 092A8648 86F70D01 01010500 0382010F 00308201 
+  0A028201 0100B036 17F82749 363E1C59 DF26E6D8 2DF302E8 A96B3192 EA51E5D1 
+  92956B43 FEEAD45E CF91A382 593D5959 BA7059F5 B8684C19 48B0B856 93ECE2DB 
+  097AFD32 D426BE8F F1AD0252 B3C700AF C05C3B95 EDD68CE2 E1620CA4 0587B95F 
+  83446CA8 CBEC6A5A D4FF5951 2AC1AB2B 692A7F2B 5DBCCD88 38402033 B2E162FB 
+  EF5EAD7F 030371C8 1F1F9BFD 23649070 C79EB092 E4F8A24F 53FEA9C6 D667C7F9 
+  41597036 5F10E806 15782537 BB560D6A E87AC303 67735FCF 65E8AF02 BB0780D3 
+  CF079722 E32AF440 E9FE8B91 6190768B C04016ED 543BFCE1 81B86DCC 0A7BDC68 
+  6FF3D171 A81D1644 28861133 B9D53586 4669486D 49FDB74E 93900FB7 63A8B8B3 
+  3F856390 019D0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 
+  301F0603 551D2304 18301680 14558CCC 7644281F 3A5612E8 E6FE3CE8 2C4AD0FD 
+  21301D06 03551D0E 04160414 558CCC76 44281F3A 5612E8E6 FE3CE82C 4AD0FD21 
+  300D0609 2A864886 F70D0101 05050003 82010100 8B6AB4E3 83826857 0B7C3052 
+  E97E3A9D 8A215888 590B297A D919F262 69E81F95 90F08980 4439AF29 82D04837 
+  F03A7A1B 84C2E7EE E6EB6097 9611B92F A4F9689B 0F48DF2D 0377887D ED4C6336 
+  ABA111AA BD36028D F568A0D3 A54FF81B 393B9B72 C0A0F298 BA407494 29E43370 
+  181AE0AD 6FF30660 A8C737E6 95BA1BB4 79E34AA1 B1719047 C5C01106 827F255A 
+  ACEA0A72 4F25712C 6A2A9868 9AE01044 C350D7FA DB7E0B89 70D5F5A3 B69DFA3F 
+  B652A3D6 B378C21A 4A464068 E9C797DB 4B46AC87 20DA60B8 DBB5D841 14E86C6B 
+  B36D9BDF 7C4F75D4 BB424A33 4AFB834F 0FAFD01D A9F7BFB0 F6F756F4 D5B59195 
+  A21F6C0E 3658C7A7 7FDC3289 FE6E83D1 E87ACA09
+  	quit
+!
+license udi pid CSR1000V sn 9ZOXBIEO4R9
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+memory free low-watermark processor 80526
+!
+!
+!
+username cisco privilege 15 secret 9 $9$cONmK/B00qLzO.$iaGnQNzSbJ3ypgnmS02qYpg3FORertbgOgB2CyOHl9g
+!
+redundancy
+!
+!
+!
+!
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ description to
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1
+ description to port7.sandbox-backend
+ vrf forwarding Mgmt-intf
+ ip address 10.10.20.176 255.255.255.0
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ description L3 Link to core-rtr01
+ ip address 172.16.252.29 255.255.255.252
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet3
+ description L3 Link to core-rtr02
+ ip address 172.16.252.33 255.255.255.252
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ description L3 Link to dist-sw01
+ ip address 172.16.252.6 255.255.255.252
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet5
+ description L3 Link to dist-sw02
+ ip address 172.16.252.14 255.255.255.252
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet6
+ description L3 Link to dist-rtr01
+ ip address 172.16.252.18 255.255.255.252
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+!
+ip forward-protocol nd
+no ip http server
+ip http secure-server
+ip route vrf Mgmt-intf 0.0.0.0 0.0.0.0 10.10.20.254
+!
+ip ssh server algorithm authentication password
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 0 0
+ password cisco
+ stopbits 1
+line vty 0 4
+ exec-timeout 720 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+!
+!
+!
+!
+!
+end
+
+dist-rtr02#
+
+2020-11-10 18:47:23,505: %UNICON-INFO: +++ dist-rtr02: executing command 'show vrf' +++
+show vrf
+  Name                             Default RD            Protocols   Interfaces
+  Mgmt-intf                        &lt;not set&gt;             ipv4,ipv6   Gi1
+dist-rtr02#
+
+2020-11-10 18:47:23,673: %UNICON-INFO: +++ dist-rtr02: executing command 'show interfaces' +++
+show interfaces
+GigabitEthernet1 is up, line protocol is up 
+  Hardware is CSR vNIC, address is 5254.001e.71c1 (bia 5254.001e.71c1)
+  Description: to port7.sandbox-backend
+  Internet address is 10.10.20.176/24
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1000Mbps, link type is auto, media type is Virtual
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:00, output 00:00:00, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 1/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     24477 packets input, 1741244 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     25602 packets output, 4441951 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     660 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet2 is up, line protocol is up 
+  Hardware is CSR vNIC, address is 5254.000b.a921 (bia 5254.000b.a921)
+  Description: L3 Link to core-rtr01
+  Internet address is 172.16.252.29/30
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1000Mbps, link type is auto, media type is Virtual
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:05, output 00:00:07, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     2149 packets input, 231186 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     2146 packets output, 274294 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet3 is up, line protocol is up 
+  Hardware is CSR vNIC, address is 5254.0013.9270 (bia 5254.0013.9270)
+  Description: L3 Link to core-rtr02
+  Internet address is 172.16.252.33/30
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1000Mbps, link type is auto, media type is Virtual
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:02, output 00:00:04, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     2154 packets input, 231536 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     2146 packets output, 274982 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet4 is up, line protocol is up 
+  Hardware is CSR vNIC, address is 5254.000c.9f4d (bia 5254.000c.9f4d)
+  Description: L3 Link to dist-sw01
+  Internet address is 172.16.252.6/30
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1000Mbps, link type is auto, media type is Virtual
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:03, output 00:00:00, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     2669 packets input, 272609 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     2182 packets output, 278068 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     320 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet5 is up, line protocol is up 
+  Hardware is CSR vNIC, address is 5254.0018.2d4a (bia 5254.0018.2d4a)
+  Description: L3 Link to dist-sw02
+  Internet address is 172.16.252.14/30
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1000Mbps, link type is auto, media type is Virtual
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:05, output 00:00:03, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     2667 packets input, 272453 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     2185 packets output, 278262 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     321 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+GigabitEthernet6 is up, line protocol is up 
+  Hardware is CSR vNIC, address is 5254.0007.c5fe (bia 5254.0007.c5fe)
+  Description: L3 Link to dist-rtr01
+  Internet address is 172.16.252.18/30
+  MTU 1500 bytes, BW 1000000 Kbit/sec, DLY 10 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation ARPA, loopback not set
+  Keepalive set (10 sec)
+  Full Duplex, 1000Mbps, link type is auto, media type is Virtual
+  output flow-control is unsupported, input flow-control is unsupported
+  ARP type: ARPA, ARP Timeout 04:00:00
+  Last input 00:00:08, output 00:00:02, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/375/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/40 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     2200 packets input, 253190 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored
+     0 watchdog, 0 multicast, 0 pause input
+     2168 packets output, 275922 bytes, 0 underruns
+     0 output errors, 0 collisions, 2 interface resets
+     0 unknown protocol drops
+     0 babbles, 0 late collision, 0 deferred
+     0 lost carrier, 0 no carrier, 0 pause output
+     0 output buffer failures, 0 output buffers swapped out
+Loopback0 is administratively down, line protocol is down 
+  Hardware is Loopback
+  Description: to
+  MTU 1514 bytes, BW 8000000 Kbit/sec, DLY 5000 usec, 
+     reliability 255/255, txload 1/255, rxload 1/255
+  Encapsulation LOOPBACK, loopback not set
+  Keepalive set (10 sec)
+  Last input never, output never, output hang never
+  Last clearing of "show interface" counters never
+  Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
+  Queueing strategy: fifo
+  Output queue: 0/0 (size/max)
+  5 minute input rate 0 bits/sec, 0 packets/sec
+  5 minute output rate 0 bits/sec, 0 packets/sec
+     0 packets input, 0 bytes, 0 no buffer
+     Received 0 broadcasts (0 IP multicasts)
+     0 runts, 0 giants, 0 throttles 
+     0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
+     0 packets output, 0 bytes, 0 underruns
+     0 output errors, 0 collisions, 0 interface resets
+     0 unknown protocol drops
+     0 output buffer failures, 0 output buffers swapped out
+dist-rtr02#
+
+2020-11-10 18:47:23,956: %UNICON-INFO: +++ dist-rtr02: executing command 'show interfaces accounting' +++
+show interfaces accounting
+GigabitEthernet1 to port7.sandbox-backend
+                Protocol    Pkts In   Chars In   Pkts Out  Chars Out
+                   Other       1429     312074         13        780
+                      IP      23583    1575003      25600    4136517
+                     ARP        121       7170         13        780
+                    IPv6        134      10104          0          0
+GigabitEthernet2 L3 Link to core-rtr01
+                Protocol    Pkts In   Chars In   Pkts Out  Chars Out
+                   Other          3        126          3        180
+                      IP       2146     231060       2143     248362
+                     ARP          3        126          3        180
+GigabitEthernet3 L3 Link to core-rtr02
+                Protocol    Pkts In   Chars In   Pkts Out  Chars Out
+                   Other          3        126          3        180
+                      IP       2151     231410       2143     249050
+                     ARP          3        126          3        180
+GigabitEthernet4 L3 Link to dist-sw01
+                Protocol    Pkts In   Chars In   Pkts Out  Chars Out
+                   Other        685     156838         18       1080
+                      IP       2298     192592       2164     250804
+           Spanning Tree         54       2862          0          0
+                     ARP         18       1080         18       1080
+                    IPv6          7        578          0          0
+GigabitEthernet5 L3 Link to dist-sw02
+                Protocol    Pkts In   Chars In   Pkts Out  Chars Out
+                   Other        686     157226         18       1080
+                      IP       2296     192272       2167     250962
+           Spanning Tree         52       2756          0          0
+                     ARP         18       1080         18       1080
+                    IPv6          7        578          0          0
+GigabitEthernet6 L3 Link to dist-rtr01
+                Protocol    Pkts In   Chars In   Pkts Out  Chars Out
+                   Other          3        180          3        180
+                      IP       2197     253010       2166     249840
+                     ARP          3        180          3        180
+Interface Loopback0 is disabled
+
+dist-rtr02#
+
+2020-11-10 18:47:24,130: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip interface' +++
+show ip interface
+GigabitEthernet1 is up, line protocol is up
+  Internet address is 10.10.20.176/24
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  VPN Routing/Forwarding "Mgmt-intf"
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet2 is up, line protocol is up
+  Internet address is 172.16.252.29/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet3 is up, line protocol is up
+  Internet address is 172.16.252.33/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet4 is up, line protocol is up
+  Internet address is 172.16.252.6/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet5 is up, line protocol is up
+  Internet address is 172.16.252.14/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet6 is up, line protocol is up
+  Internet address is 172.16.252.18/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+Loopback0 is administratively down, line protocol is down
+  Internet protocol processing disabled
+dist-rtr02#
+
+2020-11-10 18:47:24,331: %UNICON-INFO: +++ dist-rtr02: executing command 'show ipv6 interface' +++
+show ipv6 interface
+dist-rtr02#
+
+2020-11-10 18:47:24,548: %UNICON-INFO: +++ dist-rtr02: executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 16.11.01b
+Cisco IOS Software [Gibraltar], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.11.1b, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 28-May-19 12:45 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2019 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+dist-rtr02 uptime is 5 hours, 21 minutes
+Uptime for this control processor is 5 hours, 23 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: Unknown reason
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1201684K/3075K bytes of memory.
+Processor board ID 9ZOXBIEO4R9
+6 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3018504K bytes of physical memory.
+16162815K bytes of virtual hard disk at bootflash:.
+0K bytes of WebUI ODM Files at webui:.
+
+Configuration register is 0x2102
+
+dist-rtr02#
+
+2020-11-10 18:47:24,744: %UNICON-INFO: +++ dist-rtr02: executing command 'dir' +++
+dir
+Directory of bootflash:/
+
+   11  drwx            16384  Jun 27 2019 14:50:34 +00:00  lost+found
+767041  drwx             4096  Nov 10 2020 21:24:32 +00:00  .installer
+   12  -rw-        406590492  Jun 27 2019 14:51:23 +00:00  csr1000v-mono-universalk9.16.11.01b.SPA.pkg
+   13  -rw-         42784649  Jun 27 2019 14:51:23 +00:00  csr1000v-rpboot.16.11.01b.SPA.pkg
+   14  -rw-             1028  Jun 27 2019 14:51:23 +00:00  packages.conf
+824161  drwx             4096  Nov 10 2020 21:24:29 +00:00  core
+359041  drwx             4096  Nov 10 2020 21:24:22 +00:00  .prst_sync
+40801  drwx             4096  Nov 10 2020 21:24:30 +00:00  .rollback_timer
+   15  -rw-            20109  Nov 10 2020 21:24:33 +00:00  ios_core.p7b
+554881  drwx             4096  Nov 10 2020 21:25:56 +00:00  .dbpersist
+669121  drwx             8192  Nov 11 2020 02:44:47 +00:00  tracelogs
+481441  drwx             4096  Nov 10 2020 21:24:50 +00:00  virtual-instance
+   16  -rw-               30  Nov 10 2020 21:25:33 +00:00  throughput_monitor_params
+   17  -rw-             5924  Nov 10 2020 21:25:53 +00:00  cvac.log
+342721  drwx             4096  Nov 10 2020 21:25:53 +00:00  license_evlog
+   18  -rw-                1  Nov 10 2020 21:25:51 +00:00  .cvac_version
+   19  -rw-               16  Nov 10 2020 21:25:51 +00:00  iosxe_config.txt.md5
+   20  -rw-              209  Nov 10 2020 21:25:52 +00:00  csrlxc-cfg.log
+497761  drwx             4096  Nov 10 2020 21:25:56 +00:00  onep
+
+16420106240 bytes total (15101100032 bytes free)
+dist-rtr02#
+
+2020-11-10 18:47:24,911: %UNICON-INFO: +++ dist-rtr02: executing command 'show redundancy' +++
+show redundancy
+Redundant System Information :
+------------------------------
+       Available system uptime = 5 hours, 21 minutes
+Switchovers system experienced = 0
+              Standby failures = 0
+        Last switchover reason = none
+
+                 Hardware Mode = Simplex
+    Configured Redundancy Mode = Non-redundant
+     Operating Redundancy Mode = Non-redundant
+              Maintenance Mode = Disabled
+                Communications = Down      Reason: Failure
+
+Current Processor Information :
+-------------------------------
+               Active Location = slot 6
+        Current Software state = ACTIVE
+       Uptime in current state = 5 hours, 21 minutes
+                 Image Version = Cisco IOS Software [Gibraltar], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.11.1b, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 28-May-19 12:45 by mcpre
+        Configuration register = 0x2102
+
+Peer (slot: 7) information is not available because it is in 'DISABLED' state
+
+dist-rtr02#
+
+2020-11-10 18:47:25,075: %UNICON-INFO: +++ dist-rtr02: executing command 'show inventory' +++
+show inventory
+NAME: "Chassis", DESCR: "Cisco CSR1000V Chassis"
+PID: CSR1000V          , VID: V00  , SN: 9ZOXBIEO4R9
+
+NAME: "module R0", DESCR: "Cisco CSR1000V Route Processor"
+PID: CSR1000V          , VID: V00  , SN: JAB1303001C
+
+NAME: "module F0", DESCR: "Cisco CSR1000V Embedded Services Processor"
+PID: CSR1000V          , VID:      , SN:            
+
+
+dist-rtr02#
+
+2020-11-10 18:47:25,239: %UNICON-INFO: +++ dist-rtr02: executing command 'show issu rollback-timer' +++
+show issu rollback-timer
+--- Starting local lock acquisition on R0 ---
+Finished local lock acquisition on R0
+
+Rollback: inactive, no ISSU operation is in progress
+
+dist-rtr02#
+
+2020-11-10 18:47:31,092: %UNICON-INFO: +++ dist-rtr02: executing command 'show platform' +++
+show platform
+Chassis type: CSR1000V
+
+Slot      Type                State                 Insert time (ago) 
+--------- ------------------- --------------------- ----------------- 
+R0        CSR1000V            ok, active            05:23:16      
+F0        CSR1000V            ok, active            05:23:16      
+
+dist-rtr02#
+
+2020-11-10 18:47:31,239: %UNICON-INFO: +++ dist-rtr02: executing command 'show issu state detail' +++
+show issu state detail
+--- Starting local lock acquisition on R0 ---
+Finished local lock acquisition on R0
+
+Current ISSU Status: Disabled       
+Previous ISSU Operation: N/A        
+=======================================================
+System Check                        Status
+-------------------------------------------------------
+Platform ISSU Support               No
+Standby Online                      No
+Autoboot Enabled                    Yes
+SSO Mode                            No
+Install Boot                        Yes
+Valid Boot Media                    Yes
+=======================================================
+No ISSU operation is in progress
+
+dist-rtr02#
+
+2020-11-10 18:47:38,241: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf' +++
+show ip ospf
+ Routing Process "ospf 1" with ID 172.16.252.33
+ Start time: 00:02:13.976, Time elapsed: 05:21:43.985
+ Supports only single TOS(TOS0) routes
+ Supports opaque LSA
+ Supports Link-local Signaling (LLS)
+ Supports area transit capability
+ Supports NSSA (compatible with RFC 3101)
+ Supports Database Exchange Summary List Optimization (RFC 5243)
+ Event-log enabled, Maximum number of events: 1000, Mode: cyclic
+ Router is not originating router-LSAs with maximum metric
+ Initial SPF schedule delay 50 msecs
+ Minimum hold time between two consecutive SPFs 200 msecs
+ Maximum wait time between two consecutive SPFs 5000 msecs
+ Incremental-SPF disabled
+ Initial LSA throttle delay 50 msecs
+ Minimum hold time for LSA throttle 200 msecs
+ Maximum wait time for LSA throttle 5000 msecs
+ Minimum LSA arrival 100 msecs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ EXCHANGE/LOADING adjacency limit: initial 300, process maximum 300
+ Number of external LSA 1. Checksum Sum 0x009967
+ Number of opaque AS LSA 0. Checksum Sum 0x000000
+ Number of DCbitless external and opaque AS LSA 0
+ Number of DoNotAge external and opaque AS LSA 0
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Number of areas transit capable is 0
+ External flood list length 0
+ IETF NSF helper support enabled
+ Cisco NSF helper support enabled
+ Reference bandwidth unit is 100 mbps
+    Area BACKBONE(0)
+        Number of interfaces in this area is 5
+	Area has no authentication
+	SPF algorithm last executed 00:50:12.509 ago
+	SPF algorithm executed 30 times
+	Area ranges are
+	Number of LSA 18. Checksum Sum 0x08AD1A
+	Number of opaque link LSA 0. Checksum Sum 0x000000
+	Number of DCbitless LSA 2
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+dist-rtr02#
+
+2020-11-10 18:47:38,430: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip protocols' +++
+show ip protocols
+*** IP Routing is NSF aware ***
+
+Routing Protocol is "application"
+  Sending updates every 0 seconds
+  Invalid after 0 seconds, hold down 0, flushed after 0
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Maximum path: 32
+  Routing for Networks:
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+  Distance: (default is 4)
+
+Routing Protocol is "ospf 1"
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Router ID 172.16.252.33
+  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+    172.16.252.0 0.0.3.255 area 0
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    172.31.252.2         110      05:17:03
+    172.16.252.25        110      00:50:12
+    172.16.252.37        110      05:17:09
+    172.16.252.38        110      05:16:30
+    172.16.101.3         110      05:17:22
+    172.16.101.2         110      05:17:26
+  Distance: (default is 110)
+
+dist-rtr02#
+
+2020-11-10 18:47:38,598: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:38,965: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf mpls ldp interface' +++
+show ip ospf mpls ldp interface
+GigabitEthernet6
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet5
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet4
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet3
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet2
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+dist-rtr02#
+
+2020-11-10 18:47:39,131: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf mpls traffic-eng link' +++
+show ip ospf mpls traffic-eng link
+
+            OSPF Router with ID (172.16.252.33) (Process ID 1)
+
+  Area 0 MPLS TE not initialized
+dist-rtr02#
+
+2020-11-10 18:47:39,313: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:39,688: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf database router' +++
+show ip ospf database router
+
+            OSPF Router with ID (172.16.252.33) (Process ID 1)
+
+		Router Link States (Area 0)
+
+  LS age: 845
+  Options: (No TOS-capability, No DC)
+  LS Type: Router Links
+  Link State ID: 172.16.101.2
+  Advertising Router: 172.16.101.2
+  LS Seq Number: 80000010
+  Checksum: 0xAD2D
+  Length: 108
+  Number of Links: 7
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.2
+     (Link Data) Router Interface address: 172.16.252.1
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.6
+     (Link Data) Router Interface address: 172.16.252.5
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.101.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.102.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.103.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.104.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.105.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+
+  LS age: 844
+  Options: (No TOS-capability, No DC)
+  LS Type: Router Links
+  Link State ID: 172.16.101.3
+  Advertising Router: 172.16.101.3
+  LS Seq Number: 8000000F
+  Checksum: 0xE1D7
+  Length: 108
+  Number of Links: 7
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.10
+     (Link Data) Router Interface address: 172.16.252.9
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.14
+     (Link Data) Router Interface address: 172.16.252.13
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.101.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.102.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.103.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.104.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 172.16.105.0
+     (Link Data) Network Mask: 255.255.255.0
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 40
+
+
+  LS age: 914
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 172.16.252.25
+  Advertising Router: 172.16.252.25
+  LS Seq Number: 80000018
+  Checksum: 0x7ACD
+  Length: 96
+  Number of Links: 6
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 1.1.1.1
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.18
+     (Link Data) Router Interface address: 172.16.252.17
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.10
+     (Link Data) Router Interface address: 172.16.252.10
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.2
+     (Link Data) Router Interface address: 172.16.252.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.25
+     (Link Data) Router Interface address: 172.16.252.25
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.21
+     (Link Data) Router Interface address: 172.16.252.21
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+
+  LS age: 855
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 172.16.252.33
+  Advertising Router: 172.16.252.33
+  LS Seq Number: 80000019
+  Checksum: 0x50CA
+  Length: 84
+  Number of Links: 5
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.18
+     (Link Data) Router Interface address: 172.16.252.18
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.14
+     (Link Data) Router Interface address: 172.16.252.14
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.6
+     (Link Data) Router Interface address: 172.16.252.6
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.33
+     (Link Data) Router Interface address: 172.16.252.33
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.29
+     (Link Data) Router Interface address: 172.16.252.29
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+
+  LS age: 1040
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 172.16.252.37
+  Advertising Router: 172.16.252.37
+  LS Seq Number: 8000000E
+  Checksum: 0xD7D8
+  Length: 72
+  Number of Links: 4
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.38
+     (Link Data) Router Interface address: 172.16.252.37
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.253.4
+     (Link Data) Router Interface address: 172.16.253.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.21
+     (Link Data) Router Interface address: 172.16.252.22
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.29
+     (Link Data) Router Interface address: 172.16.252.30
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+
+  LS age: 931
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 172.16.252.38
+  Advertising Router: 172.16.252.38
+  LS Seq Number: 8000000E
+  Checksum: 0x920A
+  Length: 72
+  Number of Links: 4
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.38
+     (Link Data) Router Interface address: 172.16.252.38
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.253.4
+     (Link Data) Router Interface address: 172.16.253.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.25
+     (Link Data) Router Interface address: 172.16.252.26
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.252.33
+     (Link Data) Router Interface address: 172.16.252.34
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+
+  LS age: 946
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 172.31.252.2
+  Advertising Router: 172.31.252.2
+  LS Seq Number: 8000000B
+  Checksum: 0xEA20
+  Length: 36
+  AS Boundary Router
+  Number of Links: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.253.4
+     (Link Data) Router Interface address: 172.16.253.4
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+dist-rtr02#
+
+2020-11-10 18:47:39,903: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf database network' +++
+show ip ospf database network
+
+            OSPF Router with ID (172.16.252.33) (Process ID 1)
+
+		Net Link States (Area 0)
+
+  LS age: 914
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.2 (address of Designated Router)
+  Advertising Router: 172.16.252.25
+  LS Seq Number: 8000000A
+  Checksum: 0x7638
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.25
+	Attached Router: 172.16.101.2
+
+  LS age: 1109
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.6 (address of Designated Router)
+  Advertising Router: 172.16.252.33
+  LS Seq Number: 8000000A
+  Checksum: 0x6E2C
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.33
+	Attached Router: 172.16.101.2
+
+  LS age: 914
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.10 (address of Designated Router)
+  Advertising Router: 172.16.252.25
+  LS Seq Number: 8000000A
+  Checksum: 0x3471
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.25
+	Attached Router: 172.16.101.3
+
+  LS age: 1109
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.14 (address of Designated Router)
+  Advertising Router: 172.16.252.33
+  LS Seq Number: 8000000A
+  Checksum: 0x2C65
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.33
+	Attached Router: 172.16.101.3
+
+  LS age: 1109
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.18 (address of Designated Router)
+  Advertising Router: 172.16.252.33
+  LS Seq Number: 8000000A
+  Checksum: 0xEBF3
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.33
+	Attached Router: 172.16.252.25
+
+  LS age: 914
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.21 (address of Designated Router)
+  Advertising Router: 172.16.252.25
+  LS Seq Number: 8000000A
+  Checksum: 0x568A
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.25
+	Attached Router: 172.16.252.37
+
+  LS age: 914
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.25 (address of Designated Router)
+  Advertising Router: 172.16.252.25
+  LS Seq Number: 8000000A
+  Checksum: 0x3C9F
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.25
+	Attached Router: 172.16.252.38
+
+  LS age: 856
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.29 (address of Designated Router)
+  Advertising Router: 172.16.252.33
+  LS Seq Number: 8000000A
+  Checksum: 0x26A2
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.33
+	Attached Router: 172.16.252.37
+
+  LS age: 856
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.33 (address of Designated Router)
+  Advertising Router: 172.16.252.33
+  LS Seq Number: 8000000A
+  Checksum: 0xCB7
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.33
+	Attached Router: 172.16.252.38
+
+  LS age: 932
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.252.38 (address of Designated Router)
+  Advertising Router: 172.16.252.38
+  LS Seq Number: 8000000A
+  Checksum: 0xE3D1
+  Length: 32
+  Network Mask: /30
+	Attached Router: 172.16.252.37
+	Attached Router: 172.16.252.38
+
+  LS age: 947
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.253.4 (address of Designated Router)
+  Advertising Router: 172.31.252.2
+  LS Seq Number: 8000000B
+  Checksum: 0x22FD
+  Length: 36
+  Network Mask: /29
+	Attached Router: 172.31.252.2
+	Attached Router: 172.16.252.37
+	Attached Router: 172.16.252.38
+
+dist-rtr02#
+
+2020-11-10 18:47:40,114: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf database external' +++
+show ip ospf database external
+
+            OSPF Router with ID (172.16.252.33) (Process ID 1)
+
+		Type-5 AS External Link States
+
+  LS age: 1208
+  Options: (No TOS-capability, DC, Upward)
+  LS Type: AS External Link
+  Link State ID: 172.31.0.0 (External Network Number )
+  Advertising Router: 172.31.252.2
+  LS Seq Number: 8000000A
+  Checksum: 0x9967
+  Length: 36
+  Network Mask: /16
+	Metric Type: 2 (Larger than any link state path)
+	MTID: 0 
+	Metric: 20 
+	Forward Address: 0.0.0.0
+	External Route Tag: 0
+
+dist-rtr02#
+
+2020-11-10 18:47:40,311: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf database summary' +++
+show ip ospf database summary
+
+            OSPF Router with ID (172.16.252.33) (Process ID 1)
+dist-rtr02#
+
+2020-11-10 18:47:40,490: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf database opaque-area' +++
+show ip ospf database opaque-area
+
+            OSPF Router with ID (172.16.252.33) (Process ID 1)
+dist-rtr02#
+
+2020-11-10 18:47:40,685: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf virtual-links' +++
+show ip ospf virtual-links
+dist-rtr02#
+
+2020-11-10 18:47:40,891: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf interface' +++
+show ip ospf interface
+GigabitEthernet6 is up, line protocol is up 
+  Internet Address 172.16.252.18/30, Interface ID 12, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.18
+  Backup Designated router (ID) 172.16.252.25, Interface address 172.16.252.17
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:09
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/5/5, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 3
+  Last flood scan time is 0 msec, maximum is 2 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.252.25  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet5 is up, line protocol is up 
+  Internet Address 172.16.252.14/30, Interface ID 11, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.14
+  Backup Designated router (ID) 172.16.101.3, Interface address 172.16.252.13
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:08
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/4/4, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 0, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.101.3  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet4 is up, line protocol is up 
+  Internet Address 172.16.252.6/30, Interface ID 10, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.6
+  Backup Designated router (ID) 172.16.101.2, Interface address 172.16.252.5
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:01
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.101.2  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet3 is up, line protocol is up 
+  Internet Address 172.16.252.33/30, Interface ID 9, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.33
+  Backup Designated router (ID) 172.16.252.38, Interface address 172.16.252.34
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:07
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.252.38  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet2 is up, line protocol is up 
+  Internet Address 172.16.252.29/30, Interface ID 8, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.29
+  Backup Designated router (ID) 172.16.252.37, Interface address 172.16.252.30
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:03
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/1/1, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.252.37  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+dist-rtr02#
+
+2020-11-10 18:47:41,125: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:41,497: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:41,854: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:42,234: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:42,596: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:43,235: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf neighbor detail' +++
+show ip ospf neighbor detail
+ Neighbor 172.16.252.25, interface address 172.16.252.17, interface-id 12
+    In the area 0 via interface GigabitEthernet6
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.252.18 BDR is 172.16.252.17
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:31
+    Neighbor is up for 05:21:33
+    Index 1/1/1, retransmission queue length 0, number of retransmission 0
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 0
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+ Neighbor 172.16.101.3, interface address 172.16.252.13
+    In the area 0 via interface GigabitEthernet5
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.252.14 BDR is 172.16.252.13
+    Options is 0x2 in Hello (E-bit)
+    Options is 0x42 in DBD (E-bit, O-bit)
+    Dead timer due in 00:00:32
+    Neighbor is up for 05:17:52
+    Index 1/2/2, retransmission queue length 0, number of retransmission 2
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 1
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+ Neighbor 172.16.101.2, interface address 172.16.252.5
+    In the area 0 via interface GigabitEthernet4
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.252.6 BDR is 172.16.252.5
+    Options is 0x2 in Hello (E-bit)
+    Options is 0x42 in DBD (E-bit, O-bit)
+    Dead timer due in 00:00:33
+    Neighbor is up for 05:17:44
+    Index 1/3/3, retransmission queue length 0, number of retransmission 2
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 1
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+ Neighbor 172.16.252.38, interface address 172.16.252.34, interface-id 7
+    In the area 0 via interface GigabitEthernet3
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.252.33 BDR is 172.16.252.34
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:36
+    Neighbor is up for 05:17:14
+    Index 1/5/5, retransmission queue length 0, number of retransmission 2
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 1, maximum is 1
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+ Neighbor 172.16.252.37, interface address 172.16.252.30, interface-id 6
+    In the area 0 via interface GigabitEthernet2
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.252.29 BDR is 172.16.252.30
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:33
+    Neighbor is up for 05:17:14
+    Index 1/4/4, retransmission queue length 0, number of retransmission 0
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 0
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+dist-rtr02#
+
+2020-11-10 18:47:43,410: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf interface GigabitEthernet6' +++
+show ip ospf interface GigabitEthernet6
+GigabitEthernet6 is up, line protocol is up 
+  Internet Address 172.16.252.18/30, Interface ID 12, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.18
+  Backup Designated router (ID) 172.16.252.25, Interface address 172.16.252.17
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:06
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/5/5, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 3
+  Last flood scan time is 0 msec, maximum is 2 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.252.25  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+dist-rtr02#
+
+2020-11-10 18:47:43,611: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:44,191: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf interface GigabitEthernet5' +++
+show ip ospf interface GigabitEthernet5
+GigabitEthernet5 is up, line protocol is up 
+  Internet Address 172.16.252.14/30, Interface ID 11, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.14
+  Backup Designated router (ID) 172.16.101.3, Interface address 172.16.252.13
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:05
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/4/4, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 0, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.101.3  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+dist-rtr02#
+
+2020-11-10 18:47:44,380: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:44,751: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf interface GigabitEthernet4' +++
+show ip ospf interface GigabitEthernet4
+GigabitEthernet4 is up, line protocol is up 
+  Internet Address 172.16.252.6/30, Interface ID 10, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.6
+  Backup Designated router (ID) 172.16.101.2, Interface address 172.16.252.5
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:06
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.101.2  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+dist-rtr02#
+
+2020-11-10 18:47:44,939: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:45,314: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf interface GigabitEthernet3' +++
+show ip ospf interface GigabitEthernet3
+GigabitEthernet3 is up, line protocol is up 
+  Internet Address 172.16.252.33/30, Interface ID 9, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.33
+  Backup Designated router (ID) 172.16.252.38, Interface address 172.16.252.34
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:02
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.252.38  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+dist-rtr02#
+
+2020-11-10 18:47:45,502: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:45,890: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf interface GigabitEthernet2' +++
+show ip ospf interface GigabitEthernet2
+GigabitEthernet2 is up, line protocol is up 
+  Internet Address 172.16.252.29/30, Interface ID 8, Area 0
+  Attached via Network Statement
+  Process ID 1, Router ID 172.16.252.33, Network Type BROADCAST, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 172.16.252.33, Interface address 172.16.252.29
+  Backup Designated router (ID) 172.16.252.37, Interface address 172.16.252.30
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:08
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/1/1, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 5
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 172.16.252.37  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+dist-rtr02#
+
+2020-11-10 18:47:46,079: %UNICON-INFO: +++ dist-rtr02: executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ no log-adjacency-changes
+ network 172.16.252.0 0.0.3.255 area 0
+dist-rtr02#
+
+2020-11-10 18:47:46,452: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip ospf sham-links' +++
+show ip ospf sham-links
+dist-rtr02#
+
+2020-11-10 18:47:47,163: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip arp' +++
+show ip arp
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  172.16.252.5           17   5254.001e.4811  ARPA   GigabitEthernet4
+Internet  172.16.252.6            -   5254.000c.9f4d  ARPA   GigabitEthernet4
+Internet  172.16.252.13          17   5254.0002.bb20  ARPA   GigabitEthernet5
+Internet  172.16.252.14           -   5254.0018.2d4a  ARPA   GigabitEthernet5
+Internet  172.16.252.17          74   5254.0006.0358  ARPA   GigabitEthernet6
+Internet  172.16.252.18           -   5254.0007.c5fe  ARPA   GigabitEthernet6
+Internet  172.16.252.29           -   5254.000b.a921  ARPA   GigabitEthernet2
+Internet  172.16.252.30          92   5254.0016.6efb  ARPA   GigabitEthernet2
+Internet  172.16.252.33           -   5254.0013.9270  ARPA   GigabitEthernet3
+Internet  172.16.252.34          85   5254.0014.2dc5  ARPA   GigabitEthernet3
+dist-rtr02#
+
+2020-11-10 18:47:47,314: %UNICON-INFO: +++ dist-rtr02: executing command 'show vrf' +++
+show vrf
+  Name                             Default RD            Protocols   Interfaces
+  Mgmt-intf                        &lt;not set&gt;             ipv4,ipv6   Gi1
+dist-rtr02#
+
+2020-11-10 18:47:47,465: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip arp vrf Mgmt-intf' +++
+show ip arp vrf Mgmt-intf
+Protocol  Address          Age (min)  Hardware Addr   Type   Interface
+Internet  10.10.20.49            62   0050.56bf.d14d  ARPA   GigabitEthernet1
+Internet  10.10.20.50           157   0050.56bf.de5f  ARPA   GigabitEthernet1
+Internet  10.10.20.172           53   5254.0007.765e  ARPA   GigabitEthernet1
+Internet  10.10.20.176            -   5254.001e.71c1  ARPA   GigabitEthernet1
+Internet  10.10.20.254           56   0050.56bf.1121  ARPA   GigabitEthernet1
+dist-rtr02#
+
+2020-11-10 18:47:47,618: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip interface' +++
+show ip interface
+GigabitEthernet1 is up, line protocol is up
+  Internet address is 10.10.20.176/24
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  VPN Routing/Forwarding "Mgmt-intf"
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet2 is up, line protocol is up
+  Internet address is 172.16.252.29/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet3 is up, line protocol is up
+  Internet address is 172.16.252.33/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet4 is up, line protocol is up
+  Internet address is 172.16.252.6/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet5 is up, line protocol is up
+  Internet address is 172.16.252.14/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+GigabitEthernet6 is up, line protocol is up
+  Internet address is 172.16.252.18/30
+  Broadcast address is 255.255.255.255
+  Address determined by configuration file
+  MTU is 1500 bytes
+  Helper address is not set
+  Directed broadcast forwarding is disabled
+  Multicast reserved groups joined: 224.0.0.5 224.0.0.6
+  Outgoing Common access list is not set 
+  Outgoing access list is not set
+  Inbound Common access list is not set 
+  Inbound  access list is not set
+  Proxy ARP is enabled
+  Local Proxy ARP is disabled
+  Security level is default
+  Split horizon is enabled
+  ICMP redirects are always sent
+  ICMP unreachables are always sent
+  ICMP mask replies are never sent
+  IP fast switching is enabled
+  IP Flow switching is disabled
+  IP CEF switching is enabled
+  IP CEF switching turbo vector
+  IP Null turbo vector
+  Associated unicast routing topologies:
+        Topology "base", operation state is UP
+  IP multicast fast switching is enabled
+  IP multicast distributed fast switching is disabled
+  IP route-cache flags are Fast, CEF
+  Router Discovery is disabled
+  IP output packet accounting is disabled
+  IP access violation accounting is disabled
+  TCP/IP header compression is disabled
+  RTP/IP header compression is disabled
+  Probe proxy name replies are disabled
+  Policy routing is disabled
+  Network address translation is disabled
+  BGP Policy Mapping is disabled
+  Input features: MCI Check
+  IPv4 WCCP Redirect outbound is disabled
+  IPv4 WCCP Redirect inbound is disabled
+  IPv4 WCCP Redirect exclude is disabled
+Loopback0 is administratively down, line protocol is down
+  Internet protocol processing disabled
+dist-rtr02#
+
+2020-11-10 18:47:47,821: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip arp summary' +++
+show ip arp summary
+15 IP ARP entries, with 0 of them incomplete
+dist-rtr02#
+
+2020-11-10 18:47:47,999: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip traffic' +++
+show ip traffic
+IP statistics:
+  Rcvd:  35536 total, 36270 local destination
+         0 format errors, 0 checksum errors, 0 bad hop count
+         0 unknown protocol, 0 not a gateway
+         0 security failures, 0 bad options, 0 with options
+  Opts:  0 end, 0 nop, 0 basic security, 0 loose source route
+         0 timestamp, 0 extended security, 0 record route
+         0 stream ID, 0 strict source route, 0 alert, 0 cipso, 0 ump
+         0 other, 0 ignored
+  Frags: 0 reassembled, 0 timeouts, 0 couldn't reassemble
+         0 fragmented, 0 fragments, 0 couldn't fragment
+         0 invalid hole
+  Bcast: 2 received, 0 sent
+  Mcast: 11073 received, 10766 sent
+  Sent:  38118 generated, 0 forwarded
+  Drop:  4 encapsulation failed, 0 unresolved, 0 no adjacency
+         0 no route, 0 unicast RPF, 0 forced drop, 0 unsupported-addr
+         0 options denied, 0 source IP address zero
+
+ICMP statistics:
+  Rcvd: 0 format errors, 0 checksum errors, 0 redirects, 0 unreachable
+        0 echo, 0 echo reply, 0 mask requests, 0 mask replies, 0 quench
+        0 parameter, 0 timestamp, 0 timestamp replies, 0 info request, 0 other
+        0 irdp solicitations, 0 irdp advertisements
+        0 time exceeded, 0 info replies
+  Sent: 0 redirects, 0 unreachable, 0 echo, 0 echo reply
+        0 mask requests, 0 mask replies, 0 quench, 0 timestamp, 0 timestamp replies
+        0 info reply, 0 time exceeded, 0 parameter problem
+        0 irdp solicitations, 0 irdp advertisements
+
+UDP statistics:
+  Rcvd: 2 total, 0 checksum errors, 2 no port 0 finput
+  Sent: 0 total, 0 forwarded broadcasts
+
+OSPF statistics:
+  Last clearing of OSPF traffic counters never
+  Rcvd: 11097 total, 0 checksum errors
+  	10400 hello, 13 database desc, 4 link state req
+  	289 link state updates, 372 link state acks
+  Sent: 10795 total
+  	10163 hello, 12 database desc, 4 link state req
+  	529 link state updates, 91 link state acks
+
+TCP statistics:
+  Rcvd: 25170 total, 0 checksum errors, 0 no port
+  Sent: 27323 total
+
+Probe statistics:
+  Rcvd: 0 address requests, 0 address replies
+        0 proxy name requests, 0 where-is requests, 0 other
+  Sent: 0 address requests, 0 address replies (0 proxy)
+        0 proxy name replies, 0 where-is replies
+
+EIGRP-IPv4 statistics:
+  Rcvd: 0 total
+  Sent: 0 total
+
+BGP statistics:
+  Rcvd: 0 total, 0 opens, 0 notifications, 0 updates
+        0 keepalives, 0 route-refresh, 0 unrecognized
+  Sent: 0 total, 0 opens, 0 notifications, 0 updates
+        0 keepalives, 0 route-refresh
+
+PIMv2 statistics: Sent/Received
+  Total: 0/0, 0 checksum errors, 0 format errors
+  Registers: 0/0 (0 non-rp, 0 non-sm-group), Register Stops: 0/0,  Hellos: 0/0
+  Join/Prunes: 0/0, Asserts: 0/0, grafts: 0/0
+  Bootstraps: 0/0, Candidate_RP_Advertisements: 0/0
+  Queue drops: 0
+  State-Refresh: 0/0
+
+IGMP statistics: Sent/Received
+  Total: 0/0, Format errors: 0/0, Checksum errors: 0/0
+  Host Queries: 0/0, Host Reports: 0/0, Host Leaves: 0/0 
+  DVMRP: 0/0, PIM: 0/0
+  Queue drops: 0
+  Report VRF mismatch drops: 0
+
+ARP statistics:
+  Rcvd: 129 requests, 13 replies, 12 reverse, 0 other
+  Sent: 7 requests, 63 replies (0 proxy), 0 reverse
+  Drop due to input queue full: 0
+dist-rtr02#
+
+2020-11-10 18:47:48,198: %UNICON-INFO: +++ dist-rtr02: executing command 'show ip route' +++
+show ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, m - OMP
+       n - NAT, Ni - NAT inside, No - NAT outside, Nd - NAT DIA
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       H - NHRP, G - NHRP registered, g - NHRP registration summary
+       o - ODR, P - periodic downloaded static route, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+
+Gateway of last resort is not set
+
+      1.0.0.0/32 is subnetted, 1 subnets
+O        1.1.1.1 [110/2] via 172.16.252.17, 00:50:22, GigabitEthernet6
+      172.16.0.0/16 is variably subnetted, 21 subnets, 4 masks
+O        172.16.101.0/24 
+           [110/41] via 172.16.252.13, 05:17:37, GigabitEthernet5
+           [110/41] via 172.16.252.5, 05:17:44, GigabitEthernet4
+O        172.16.102.0/24 
+           [110/41] via 172.16.252.13, 05:17:54, GigabitEthernet5
+           [110/41] via 172.16.252.5, 05:17:37, GigabitEthernet4
+O        172.16.103.0/24 
+           [110/41] via 172.16.252.13, 05:17:31, GigabitEthernet5
+           [110/41] via 172.16.252.5, 05:17:36, GigabitEthernet4
+O        172.16.104.0/24 
+           [110/41] via 172.16.252.13, 05:17:31, GigabitEthernet5
+           [110/41] via 172.16.252.5, 05:17:36, GigabitEthernet4
+O        172.16.105.0/24 
+           [110/41] via 172.16.252.13, 05:17:31, GigabitEthernet5
+           [110/41] via 172.16.252.5, 05:17:36, GigabitEthernet4
+O        172.16.252.0/30 [110/2] via 172.16.252.17, 05:21:05, GigabitEthernet6
+C        172.16.252.4/30 is directly connected, GigabitEthernet4
+L        172.16.252.6/32 is directly connected, GigabitEthernet4
+O        172.16.252.8/30 [110/2] via 172.16.252.17, 05:21:05, GigabitEthernet6
+C        172.16.252.12/30 is directly connected, GigabitEthernet5
+L        172.16.252.14/32 is directly connected, GigabitEthernet5
+C        172.16.252.16/30 is directly connected, GigabitEthernet6
+L        172.16.252.18/32 is directly connected, GigabitEthernet6
+O        172.16.252.20/30 
+           [110/2] via 172.16.252.30, 05:17:19, GigabitEthernet2
+           [110/2] via 172.16.252.17, 05:21:05, GigabitEthernet6
+O        172.16.252.24/30 
+           [110/2] via 172.16.252.34, 05:17:18, GigabitEthernet3
+           [110/2] via 172.16.252.17, 05:21:05, GigabitEthernet6
+C        172.16.252.28/30 is directly connected, GigabitEthernet2
+L        172.16.252.29/32 is directly connected, GigabitEthernet2
+C        172.16.252.32/30 is directly connected, GigabitEthernet3
+L        172.16.252.33/32 is directly connected, GigabitEthernet3
+O        172.16.252.36/30 
+           [110/2] via 172.16.252.34, 05:17:19, GigabitEthernet3
+           [110/2] via 172.16.252.30, 05:16:40, GigabitEthernet2
+O        172.16.253.0/29 [110/2] via 172.16.252.34, 05:17:13, GigabitEthernet3
+                         [110/2] via 172.16.252.30, 05:17:19, GigabitEthernet2
+O E2  172.31.0.0/16 [110/20] via 172.16.252.34, 05:17:13, GigabitEthernet3
+                    [110/20] via 172.16.252.30, 05:17:19, GigabitEthernet2
+dist-rtr02#
+
+2020-11-10 18:47:48,399: %UNICON-INFO: +++ dist-rtr02: executing command 'show ipv6 route' +++
+show ipv6 route
+IPv6 Routing Table - default - 1 entries
+Codes: C - Connected, L - Local, S - Static, U - Per-user Static route
+       B - BGP, R - RIP, H - NHRP, I1 - ISIS L1
+       I2 - ISIS L2, IA - ISIS interarea, IS - ISIS summary, D - EIGRP
+       EX - EIGRP external, RL - RPL, O - OSPF Intra, OI - OSPF Inter
+       OE1 - OSPF ext 1, OE2 - OSPF ext 2, ON1 - OSPF NSSA ext 1
+       ON2 - OSPF NSSA ext 2, la - LISP alt, lr - LISP site-registrations
+       ld - LISP dyn-eid, lA - LISP away, le - LISP extranet-policy
+       lp - LISP publications, a - Application, m - OMP
+L   FF00::/8 [0/0]
+     via Null0, receive
+dist-rtr02#
+
+2020-11-10 18:47:48,639: %UNICON-INFO: +++ dist-rtr02: executing command 'show vrf detail' +++
+show vrf detail
+VRF Mgmt-intf (VRF Id = 1); default RD &lt;not set&gt;; default VPNID &lt;not set&gt;
+  New CLI format, supports multiple address-families
+  Flags: 0x1808
+  Interfaces:
+    Gi1                     
+Address family ipv4 unicast (Table ID = 0x1):
+  Flags: 0x0
+  No Export VPN route-target communities
+  No Import VPN route-target communities
+  No import route-map
+  No global export route-map
+  No export route-map
+  VRF label distribution protocol: not configured
+  VRF label allocation mode: per-prefix
+Address family ipv6 unicast (Table ID = 0x1E000001):
+  Flags: 0x0
+  No Export VPN route-target communities
+  No Import VPN route-target communities
+  No import route-map
+  No global export route-map
+  No export route-map
+  VRF label distribution protocol: not configured
+  VRF label allocation mode: per-prefix
+Address family ipv4 multicast not active
+Address family ipv6 multicast not active
+
+dist-rtr02#
+
+2020-11-10 18:47:48,836: %UNICON-INFO: +++ dist-rtr02: executing command 'show vlan' +++
+show vlan
+show vlan
+% Incomplete command.
+
+dist-rtr02#</msg>
+<status status="PASS" starttime="20201110 18:47:22.802" endtime="20201110 18:47:49.252"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.801" endtime="20201110 18:47:49.253"></status>
+</kw>
+<status status="PASS" starttime="20201110 18:47:22.780" endtime="20201110 18:47:49.253" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Compare snapshots">
+<kw name="Compare profile &quot;./good/good_snapshot&quot; with &quot;./current/new_snapshot&quot; on devices &quot;${alldevices}&quot;" library="genie.libs.robot.GenieRobot">
+<doc>Compare system profiles taken as snapshots during the run</doc>
+<msg timestamp="20201110 18:47:49.267" level="INFO">Comparison between ./good/good_snapshot and ./current/new_snapshot is identical
+</msg>
+<msg timestamp="20201110 18:47:49.272" level="INFO">Comparison between ./good/good_snapshot and ./current/new_snapshot is identical
+</msg>
+<msg timestamp="20201110 18:47:49.273" level="INFO">Comparison between ./good/good_snapshot and ./current/new_snapshot is identical
+</msg>
+<msg timestamp="20201110 18:47:49.275" level="INFO">Comparison between ./good/good_snapshot and ./current/new_snapshot is identical
+</msg>
+<msg timestamp="20201110 18:47:49.279" level="INFO">Comparison between ./good/good_snapshot and ./current/new_snapshot is identical
+</msg>
+<msg timestamp="20201110 18:47:49.280" level="INFO">Comparison between ./good/good_snapshot and ./current/new_snapshot is identical
+</msg>
+<msg timestamp="20201110 18:47:49.282" level="FAIL">
+**********
+Comparison between ./good/good_snapshot and ./current/new_snapshot is different for feature 'arp' for device:
+
+'dist-rtr02'
+ info:
+  interfaces:
+   GigabitEthernet1:
+    ipv4:
+     neighbors:
++     10.10.20.172: 
++      ip: 10.10.20.172
++      link_layer_address: 5254.0007.765e
++      origin: dynamic
+
+
+**********
+Comparison between ./good/good_snapshot and ./current/new_snapshot is different for feature 'routing' for device:
+
+'dist-rtr02'
+ info:
+  vrf:
+   default:
+    address_family:
+     ipv4:
+      routes:
++      1.1.1.1/32: 
++       active: True
++       metric: 2
++       next_hop: 
++        next_hop_list: 
++         1: 
++          index: 1
++          next_hop: 172.16.252.17
++          outgoing_interface: GigabitEthernet6
++          updated: 00:50:22
++       route: 1.1.1.1/32
++       route_preference: 110
++       source_protocol: ospf
++       source_protocol_codes: O</msg>
+<status status="FAIL" starttime="20201110 18:47:49.254" endtime="20201110 18:47:49.282"></status>
+</kw>
+<status status="FAIL" starttime="20201110 18:47:49.253" endtime="20201110 18:47:49.282" critical="yes">
+**********
+Comparison between ./good/good_snapshot and ./current/new_snapshot is different for feature 'arp' for device:
+
+'dist-rtr02'
+ info:
+  interfaces:
+   GigabitEthernet1:
+    ipv4:
+     neighbors:
++     10.10.20.172: 
++      ip: 10.10.20.172
++      link_layer_address: 5254.0007.765e
++      origin: dynamic
+
+
+**********
+Comparison between ./good/good_snapshot and ./current/new_snapshot is different for feature 'routing' for device:
+    [ Message content over the limit has been removed. ]
+ info:
+  vrf:
+   default:
+    address_family:
+     ipv4:
+      routes:
++      1.1.1.1/32: 
++       active: True
++       metric: 2
++       next_hop: 
++        next_hop_list: 
++         1: 
++          index: 1
++          next_hop: 172.16.252.17
++          outgoing_interface: GigabitEthernet6
++          updated: 00:50:22
++       route: 1.1.1.1/32
++       route_preference: 110
++       source_protocol: ospf
++       source_protocol_codes: O</status>
+</test>
+<status status="FAIL" starttime="20201110 18:47:18.642" endtime="20201110 18:47:49.283"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="1">Critical Tests</stat>
+<stat pass="2" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="1" id="s1" name="Compare">Compare</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20201110 18:47:19.983" level="WARN">Could not load the Datafile correctly</msg>
+</errors>
+</robot>
