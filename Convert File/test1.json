@@ -1,0 +1,86 @@
+[
+    {
+        "device_hostname": "sw1.example.com",
+        "device_native_ip": "10.10.31.222",
+        "device_site": "abc",
+        "device_network": "SC2",
+        "device_model_type_name": "SwCiscoIOS",
+        "device_type": "ios",
+        "device_contact_status": "established",
+        "device_management_status": "active_mode",
+        "proxy_connect_ip": "192.168.143.72",
+        "spectrum_model_handle": "0x60c06f"
+    },
+    {
+        "device_hostname": "SW2.example.com",
+        "device_native_ip": "10.76.46.97",
+        "device_site": "bbb",
+        "device_network": "SC3",
+        "device_model_type_name": "SwCiscoIOS",
+        "device_type": "ios",
+        "device_contact_status": "established",
+        "device_management_status": "active_mode",
+        "proxy_connect_ip": "10.76.46.97",
+        "spectrum_model_handle": "0x344036"
+    },
+    {
+        "device_hostname": "SW3.example1.com",
+        "device_native_ip": "10.14.255.20",
+        "device_site": "ccc",
+        "device_network": "SC4",
+        "device_model_type_name": "SwCiscoIOS",
+        "device_type": "ios",
+        "device_contact_status": "established",
+        "device_management_status": "active_mode",
+        "proxy_connect_ip": "192.168.133.231",
+        "spectrum_model_handle": "0x900097"
+    },
+    {
+        "device_hostname": "R2.example.com",
+        "device_native_ip": "10.16.170.38",
+        "device_site": "ddd",
+        "device_network": "SC3",
+        "device_model_type_name": "SwCiscoIOS",
+        "device_type": "ios",
+        "device_contact_status": "established",
+        "device_management_status": "active_mode",
+        "proxy_connect_ip": "10.16.170.38",
+        "spectrum_model_handle": "0x336fba"
+    },
+    {
+        "device_hostname": "R4.example.com",
+        "device_native_ip": "10.15.121.66",
+        "device_site": "rrr",
+        "device_network": "SC1",
+        "device_model_type_name": "GnSNMPDev",
+        "device_type": "CiscoDV",
+        "device_contact_status": "established",
+        "device_management_status": "active_mode",
+        "proxy_connect_ip": "10.15.121.66",
+        "spectrum_model_handle": "0x912f18"
+    },
+    {
+        "device_hostname": "R33.example.com",
+        "device_native_ip": "10.76.170.239",
+        "device_site": "uu",
+        "device_network": "SC4",
+        "device_model_type_name": "SwCiscoIOS",
+        "device_type": "ios",
+        "device_contact_status": "established",
+        "device_management_status": "active_mode",
+        "proxy_connect_ip": "10.76.170.239",
+        "spectrum_model_handle": "0x336fba"
+    },
+    {
+        "device_hostname": "R9",
+        "device_native_ip": "10.133.144.62",
+        "device_site": "fdf",
+        "device_network": "SC4",
+        "device_model_type_name": "CiscoNXOS",
+        "device_type": "nxos",
+        "device_contact_status": "established",
+        "device_management_status": "active_mode",
+        "proxy_connect_ip": "192.168.250.48",
+        "spectrum_model_handle": "0x5008ad"
+    }
+]
