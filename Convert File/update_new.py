@@ -30,7 +30,7 @@ dic = {}
 agencylist = []
 
 # define the template file lcoation
-origin_file = r"/home/cxu/pyats/hostname.xlsx"
+origin_file = r"/home/user/pyats/hostname.xlsx"
 
 # the difference will be categorized in 3 groups
 #   iterable_item_added
@@ -49,12 +49,12 @@ try:
         # convert sitename that only contains alphnum and space
         else:
             sitename = re.sub('[^A-Za-z0-9_ ]+', '', temp_sitename)
-        directory = r"/home/cxu/pyats/{}".format(agency + '/' + sitename)
+        directory = r"/home/user/pyats/{}".format(agency + '/' + sitename)
         # if directory does not exist - new site, create new directory, copy template file to newly created directory
         # append new info to the new file
         if not os.path.exists(directory):
             os.makedirs(directory)
-            target_file = r"/home/cxu/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
+            target_file = r"/home/user/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
             shutil.copyfile(origin_file, target_file)
             wb = load_workbook(target_file)
             page = wb.active
@@ -70,7 +70,7 @@ try:
             elif sitename not in dic[agency]:
                 dic[agency].append(sitename)
         else:
-            target_file = r"/home/cxu/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
+            target_file = r"/home/user/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
             wb = load_workbook(target_file)
             source = wb['Sheet1']
             page = wb.active
@@ -101,10 +101,10 @@ try:
             sitename = item['device_hostname'][4:12]
         else:
             sitename = re.sub('[^A-Za-z0-9_ ]+', '', temp_sitename)
-        directory = r"/home/cxu/pyats/{}".format(agency + '/' + sitename)
+        directory = r"/home/user/pyats/{}".format(agency + '/' + sitename)
         if not os.path.exists(directory):
             os.makedirs(directory)
-            target_file = r"/home/cxu/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
+            target_file = r"/home/user/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
             shutil.copyfile(origin_file, target_file)
             wb = load_workbook(target_file)
             page = wb.active
