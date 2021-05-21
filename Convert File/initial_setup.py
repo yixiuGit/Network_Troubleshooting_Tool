@@ -8,7 +8,7 @@ from pyats.contrib.creators.file import File
 with open('test.json') as f:
     data = json.load(f)
 
-origin_file = r"/home/cxu/pyats/hostname.xlsx"
+origin_file = r"/home/user/pyats/hostname.xlsx"
 agency_list =[]
 site_list = []
 agency_site = {}
@@ -27,12 +27,12 @@ for i in range(0,len(data)):
         # print(agency_site[agency])
     elif sitename not in agency_site[agency]:
         agency_site[agency].append(sitename)
-    directory = r"/home/cxu/pyats/{}".format(agency + '/' + sitename)
+    directory = r"/home/user/pyats/{}".format(agency + '/' + sitename)
     if agency not in agency_list:
         agency_list.append(agency)
     if not os.path.exists(directory):
         os.makedirs(directory)
-        target_file = r"/home/cxu/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
+        target_file = r"/home/user/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
         shutil.copyfile(origin_file,target_file)
         wb = load_workbook(target_file)
         page = wb.active
@@ -40,7 +40,7 @@ for i in range(0,len(data)):
         page.append(info)
         wb.save(filename=target_file)
     else:
-        target_file = "/home/cxu/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
+        target_file = "/home/user/pyats/{}/{}/hostname.xlsx".format(agency,sitename)
         wb = load_workbook(target_file)
         source = wb['Sheet1']
         page = wb.active
@@ -56,17 +56,17 @@ for i in range(0,len(data)):
 # print(agency_list)
 # print(agency_site)
 for customer in agency_list:
-    directory = "/home/cxu/pyats/{}".format(customer)
+    directory = "/home/user/pyats/{}".format(customer)
     creator = File(path=directory,recurse=True,encode_password=True)
     creator.to_testbed_file(directory)
 
 for key, value in agency_site.items():
-    agencydirectory = r"/home/cxu/pyats/{}/file11.txt".format(key)
+    agencydirectory = r"/home/user/pyats/{}/file11.txt".format(key)
     print(agencydirectory)
     with open(agencydirectory,'a') as file:
         for s in value:
-            sitedirectory = r"/home/cxu/pyats/{}/{}/".format(key,s)
-            devicedirectory = r"/home/cxu/pyats/{}/{}/device.txt".format(key,s)
+            sitedirectory = r"/home/user/pyats/{}/{}/".format(key,s)
+            devicedirectory = r"/home/user/pyats/{}/{}/device.txt".format(key,s)
             print(sitedirectory)
             file.write(s+"\n")
             with open (devicedirectory,'a') as f:
